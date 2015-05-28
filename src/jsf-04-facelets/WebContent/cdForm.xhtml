@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+
+<ui:composition template="/WEB-INF/layout/layout.xhtml">
+  <ui:define name="title">CD Form</ui:define>
+  <ui:define name="content">
+
+	<!-- use the form tag to setup this form -->
+	<h:form id="cdForm">
+
+		<h:inputHidden id="cdid" value="#{CDManagerBean.cd.id}" />
+
+		<h:panelGrid id="formGrid" columns="3" rowClasses="row1, row2">
+
+			<!-- Title                                   -->
+			<h:outputLabel id="titleLabel" for="title" styleClass="label" value="Title" />
+			<h:inputText id="title" value="#{CDManagerBean.cd.title}"
+				required="true" />
+			<h:message  id="titleMessage" for="title" styleClass="errorText" />
+
+			<!-- Artist                                   -->
+			<h:outputLabel  id="artistLabel" for="artist" styleClass="label" value="Artist" />
+			<h:inputText id="artist" value="#{CDManagerBean.cd.artist}"
+				required="true" />
+			<h:message  id="titleMessage" for="artist" styleClass="errorText" />
+
+			<!-- Price                                   -->
+			<h:outputLabel  id="priceLabel" for="price" styleClass="label" value="Price" />
+			<h:inputText id="price" value="#{CDManagerBean.cd.price}"
+				required="true">
+				<f:validateDoubleRange minimum="15.0" maximum="100.0" />
+			</h:inputText>
+			<h:message  id="priceMessage" for="price" styleClass="errorText" />
+
+
+			<!-- Category                                   -->
+			<h:outputLabel  id="categoryLabel" for="category" styleClass="label" value="Category" />
+
+			<h:selectOneRadio id="category" value="#{CDManagerBean.cd.category}"
+				immediate="true" onclick="submit()"
+				valueChangeListener="#{CDManagerBean.categorySelected}">
+				<f:selectItems value="#{CDManagerBean.categories}" />
+			</h:selectOneRadio>
+
+			<h:message id="categoryMessage" for="category" styleClass="errorText" />
+
+			<!-- SubCategory                                   -->
+			<h:outputLabel id="subcategoryLabel" for="subcategory" styleClass="label"
+				value="Subcategory" />
+
+			<h:selectOneListbox id="subcategory"
+				value="#{CDManagerBean.cd.subCategory}"
+				binding="#{CDManagerBean.subCategoryList}">
+				<f:selectItems value="#{CDManagerBean.subCategories}" />
+			</h:selectOneListbox>
+
+			<h:message id="subcategoryMessage" for="subcategory" styleClass="errorText" />
+
+
+		</h:panelGrid>
+
+		<br />
+
+		<!-- button that when clicked will cause
+      	the addCD method to get invoked. -->
+		<h:commandButton id="submitAdd" action="#{CDManagerBean.addCD}"
+			value="Add CD" rendered="#{not CDManagerBean.editMode}" />
+
+		<h:commandButton id="submitUpdate" action="#{CDManagerBean.updateCD}"
+			value="Update CD" rendered="#{CDManagerBean.editMode}" />
+
+	</h:form>
+  </ui:define>
+</ui:composition>
+</html>

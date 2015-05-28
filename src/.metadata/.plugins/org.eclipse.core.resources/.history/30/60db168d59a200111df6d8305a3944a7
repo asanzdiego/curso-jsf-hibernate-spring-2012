@@ -1,0 +1,42 @@
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import modelo.Cliente;
+import modelo.Direccion;
+import modelo.Factura;
+
+import org.hibernate.Session;
+
+import util.HibernateUtil;
+
+public class PruebaOneToManyList {
+
+  public static void main(final String[] args) throws InterruptedException {
+
+    System.out.println("==============================");
+    final Direccion d = new Direccion("Madrid", "C/Minganillas", "12345");
+    final Cliente c = new Cliente(0, "Tubos Borondo", d, "91 123 45 67");
+
+    final List<Factura> facturas = new ArrayList<Factura>();
+    facturas.add(new Factura(0, "FAC-1", new Date(), c));
+    facturas.add(new Factura(0, "FAC-2", new Date(), c));
+    facturas.add(new Factura(0, "FAC-3", new Date(), c));
+    facturas.add(new Factura(0, "FAC-4", new Date(), c));
+    facturas.add(new Factura(0, "FAC-5", new Date(), c));
+
+    c.setFacturas(facturas);
+
+    final Session s = HibernateUtil.getSessionFactory().openSession();
+    System.out.println("==============================");
+    s.beginTransaction();
+
+    s.saveOrUpdate(c);
+
+    s.getTransaction().commit();
+    s.close();
+
+    System.out.println("==============================");
+  }
+
+}

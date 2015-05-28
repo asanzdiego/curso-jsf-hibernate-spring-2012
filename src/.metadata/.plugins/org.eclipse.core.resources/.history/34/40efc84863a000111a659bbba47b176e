@@ -1,0 +1,65 @@
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
+import modelo.Cliente;
+import modelo.DatosBancarios;
+import modelo.Direccion;
+import modelo.Pedido;
+
+import org.hibernate.Session;
+
+import util.HibUtil;
+
+
+public class PruebaOneToMany {
+
+	public static void main(String[] args) throws InterruptedException {
+		 
+		
+		System.out.println("==============================");
+		Direccion d = new Direccion("Madrid","C/Barquillo","12345");
+		Cliente c = new Cliente(0,"Iberica de Molinillos",d,"91 123 45 67");
+		
+		Set<Pedido> pedidos = new HashSet<Pedido>();
+		pedidos.add(new Pedido(0,"COD-1",new Date(),c));
+		pedidos.add(new Pedido(0,"COD-2",new Date(),c));
+		pedidos.add(new Pedido(0,"COD-3",new Date(),c));
+		pedidos.add(new Pedido(0,"COD-4",new Date(),c));
+		pedidos.add(new Pedido(0,"COD-5",new Date(),c));
+		
+		c.setPedidos(pedidos);
+		
+		DatosBancarios db = new DatosBancarios(0,c,"HTC",5000);
+		c.setDatosBancarios(db);		
+		
+		Session s = HibUtil.getSessionFactory().openSession();		
+		Thread.sleep(2500);
+		s.beginTransaction();	
+		
+		//s.saveOrUpdate(c);
+		
+		s.getTransaction().commit();
+		s.close();
+		
+		//////////////
+		
+		s = HibUtil.getSessionFactory().openSession();			
+		
+		System.out.println("==============================");
+		Cliente c2 = (Cliente) s.get(Cliente.class, 6);		
+		
+		System.out.println("Nombre:"+c2.getNombre());
+		System.out.println("Banco:"+c2.getDatosBancarios().getBanco());
+		
+		s.close();
+		
+		for(Pedido p: c2.getPedidos())
+			System.out.println(p.getCodigo());
+		
+		
+		
+	}
+	
+	
+}

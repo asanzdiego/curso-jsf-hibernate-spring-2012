@@ -1,0 +1,37 @@
+package curso.dao.hibernate;
+
+import java.util.List;
+
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
+import curso.dao.UsuarioDao;
+import curso.modelo.Usuario;
+
+public class UsuarioDaoHibernateTemplateCursoImpl extends HibernateDaoSupport
+		implements UsuarioDao {
+
+	public void deleteUsuario(Integer id) {
+		Usuario u=
+			(Usuario) getHibernateTemplate().get(Usuario.class, id);
+		if(u!=null)
+			getHibernateTemplate().delete(u);
+	}
+
+	public Usuario findUsuario(Integer id) {
+		return  (Usuario) getHibernateTemplate().get(Usuario.class, id);
+	}
+
+	public List listAll() {
+		return getHibernateTemplate().find("from Usuario");
+	}
+
+	public void saveListaUsuarios(Usuario[] usuarios) {
+		for (Usuario usuario : usuarios) {
+			saveUsuario(usuario);
+		}
+	}
+
+	public void saveUsuario(Usuario usuario) {
+		getHibernateTemplate().save(usuario);
+	}
+}

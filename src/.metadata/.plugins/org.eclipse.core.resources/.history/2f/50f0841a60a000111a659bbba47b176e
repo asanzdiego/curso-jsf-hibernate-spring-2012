@@ -1,0 +1,41 @@
+import modelo.Persona;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+public class PruebaDetached {
+
+  public static void main(final String[] args) {
+
+    final SessionFactory sf = HibernateUtil.getSessionFactory();
+    sf.openStatelessSession();
+    Session s = sf.openSession();
+
+    s.beginTransaction();
+    final Persona p = (Persona) s.get(Persona.class, 1);
+    p.setNombre("Ringo");
+    s.evict(p);
+    s.getTransaction().commit();
+    s.close();
+
+    Persona p2 = (Persona) s.get(Persona.class, 2);
+    // Otra session
+    s = sf.openSession();
+    s.beginTransaction();
+
+    final Persona pAux = (Persona) s.get(Persona.class, 2);
+
+    p2.setNombre("FRY");
+
+    // s.update(p2);
+    p2 = (Persona) s.merge(p2);
+
+    p2.setNombre("Atriquitraun");
+
+    s.getTransaction().commit();
+
+    sf.close();
+
+  }
+
+}

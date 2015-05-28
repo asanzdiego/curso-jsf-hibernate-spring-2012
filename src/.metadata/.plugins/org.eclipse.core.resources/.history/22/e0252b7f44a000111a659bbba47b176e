@@ -1,0 +1,35 @@
+import java.util.List;
+
+import modelo.Persona;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+public class PruebaQuery {
+
+  public static void main(final String[] args) {
+
+    final SessionFactory sf = HibUtil.getSessionFactory();
+
+    final Session s = sf.openSession();
+    s.beginTransaction();
+
+    final Query q = s.createQuery("select p from Persona p");
+    final List<Persona> lista = q.list();
+
+    for (final Persona p : lista) {
+      System.out.print(p.getIdPersona() + "\t");
+      System.out.print(p.getNombre() + "\t");
+      System.out.print(p.getAltura() + "\t");
+      System.out.print(p.getDireccion() + "\t");
+      System.out.print(p.getTelefono() + "\t\n");
+    }
+
+    s.getTransaction().commit();
+    s.close();
+    sf.close();
+
+  }
+
+}

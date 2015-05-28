@@ -1,0 +1,244 @@
+Problema con Spring Transactions e Hibernate
+
+Hola a todos:
+
+Soy nuevo en este foro. Mi nombre es Adolfo.
+
+Tengo un problema con las transacciones de Spring, y lo envío a este foro, para ver si alguien me puede ayudar a solucionarlo.
+
+Estoy atascado en un punto donde no sé salir, pues no me da error, pero no hace lo que se supone que debería hacer.
+
+Tengo un DAO (PersonaDAO) que hereda de HibernateDaoSupport con estos métodos:
+
+[CODE]
+  public void save(final Persona p) {
+   this.getHibernateTemplate().saveOrUpdate(p);
+  }
+
+  public void savePersonas(final List<Persona> personas) {
+    for (final Persona persona : personas) {
+     this.save(persona);
+    }
+  }
+[/CODE]
+
+Y luego en el programa principal, llamo a savePersonas, con un List de objetos de tipo Persona, con uno de ellos mal que salta una excepción al salvarlo.
+
+[CODE]
+  final ApplicationContext appCtx = new ClassPathXmlApplicationContext(configFile);
+
+  final IPersonaDAO dao = (IPersonaDAO) appCtx.getBean("miDao");
+
+  final List<Persona> personas = new ArrayList<Persona>();
+
+  final Persona p1 = new Persona();
+  p1.setEdad(9);
+  p1.setNombre("adolfo");
+  personas.add(p1);
+
+  final Persona p2 = new Persona();
+  p2.setEdad(9);
+  p2.setNombre(null); // va a dar error al insertar y debería hacer rollback
+  personas.add(p2);
+
+  dao.savePersonas(personas);
+[/CODE]
+
+Entiendo que si añado transaccionalidad al método save mediante AOP, debería hacer un rollback y no guardar ninguno de los objetos que le paso en el List.
+
+Pero no lo hace, me guarda el primero (que no da error) y luego salta la excepción y termina el programa.
+
+He probado con este fichero de configuración:
+
+[CODE]
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns:aop="http://www.springframework.org/schema/aop"
+     xmlns:tx="http://www.springframework.org/schema/tx"
+     xsi:schemaLocation="
+     http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+     http://www.springframework.org/schema/tx
+     http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+     http://www.springframework.org/schema/aop
+     http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+
+  <bean id="miDao"
+    class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+    <property name="transactionManager">
+      <ref local="transactionManager" />
+    </property>
+    <property name="target">
+      <ref local="daoTarget" />
+    </property>
+    <property name="transactionAttributes">
+      <props>
+        <prop key="save*">PROPAGATION_REQUIRED</prop>
+      </props>
+    </property>
+  </bean>
+
+  <bean id="daoTarget" class="dao.PersonaDAO">
+    <property name="sessionFactory">
+      <ref local="sessionFactory" />
+    </property>
+  </bean>
+
+  <bean id="transactionManager"
+    class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+    <property name="sessionFactory">
+      <ref bean="sessionFactory" />
+    </property>
+  </bean>
+  
+  <bean id="sessionFactory"
+    class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+    <property name="dataSource">
+      <ref local="myDataSource" />
+    </property>
+    <property name="mappingResources">
+      <list>
+        <value>model/persona.hbm.xml</value>
+      </list>
+    </property>
+    <property name="hibernateProperties">
+      <props>
+        <prop key="hibernate.dialect">
+          org.hibernate.dialect.MySQLDialect
+        </prop>
+        <prop key="hibernate.connection.pool_size">1</prop>
+        <prop key="hibernate.show_sql">false</prop>
+        <prop key="hibernate.hbm2ddl.auto">create</prop>
+      </props>
+    </property>
+  </bean>
+  
+  <bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+    <property name="driverClassName">
+      <value>com.mysql.jdbc.Driver</value>
+    </property>
+    <property name="url">
+      <value>jdbc:mysql://localhost/clase</value>
+    </property>
+    <property name="username">
+      <value>clase</value>
+    </property>
+    <property name="password">
+      <value>clase</value>
+    </property>
+  </bean>
+  
+</beans>
+[/CODE]
+
+Y también he probado con este otro fichero de configuración:
+
+[CODE]
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns:aop="http://www.springframework.org/schema/aop"
+     xmlns:tx="http://www.springframework.org/schema/tx"
+     xsi:schemaLocation="
+     http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+     http://www.springframework.org/schema/tx
+     http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+     http://www.springframework.org/schema/aop
+     http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+
+
+  <bean id="miDao" class="dao.PersonaDAO">
+    <property name="sessionFactory">
+      <ref local="miSessionFactory" />
+    </property>
+  </bean>
+
+  <bean id="miSessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+    <property name="dataSource">
+      <ref local="miDataSource" />
+    </property>
+    <property name="mappingResources">
+      <list>
+        <value>model/persona.hbm.xml</value>
+      </list>
+    </property>
+    <property name="hibernateProperties">
+      <props>
+        <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+        <prop key="hibernate.show_sql">false</prop>
+        <prop key="hibernate.hbm2ddl.auto">create</prop>
+      </props>
+    </property>
+  </bean>
+
+  <bean id="miDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+    <property name="driverClassName">
+      <value>com.mysql.jdbc.Driver</value>
+    </property>
+    <property name="url">
+      <value>jdbc:mysql://localhost:3306/clase</value>
+    </property>
+    <property name="username">
+      <value>clase</value>
+    </property>
+    <property name="password">
+      <value>clase</value>
+    </property>
+  </bean>
+  
+  <aop:config>
+    <aop:pointcut id="daoPoincut" expression="execution(* dao.*.*(..))" />
+    <aop:advisor advice-ref="txAdvice" pointcut-ref="daoPoincut" />
+  </aop:config>
+  
+  <tx:advice id="txAdvice" transaction-manager="txManager">
+    <tx:attributes>
+      <tx:method name="list*" read-only="true" />
+      <tx:method name="save*" />
+    </tx:attributes>
+  </tx:advice>
+
+  <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <property name="dataSource" ref="miDataSource" />
+  </bean>
+
+</beans>
+[/CODE]
+
+Las librerías que uso son las siguientes:
+
+[CODE]
+  antlr-2.7.7.jar
+  aopalliance-1.0.jar
+  aspectjrt-1.6.12.jar
+  aspectjweaver-1.6.12.jar
+  cglib-nodep-2.2.2.jar
+  commons-collections-3.2.1.jar
+  commons-dbcp-1.4.jar
+  commons-logging-1.1.1.jar
+  commons-pool-1.6.jar
+  dom4j-1.6.1.jar
+  hibernate-3.2.7.ga.jar
+  jta-1.1.jar
+  mysql-connector-java-5.1.19.jar
+  spring-aop-2.5.6.SEC03.jar
+  spring-beans-2.5.6.SEC03.jar
+  spring-context-2.5.6.SEC03.jar
+  spring-core-2.5.6.SEC03.jar
+  spring-dao-2.0.8.jar
+  spring-jdbc-2.5.6.SEC03.jar
+  spring-orm-2.5.6.SEC03.jar
+  spring-tx-2.5.6.SEC03.jar
+[/CODE]
+
+
+A ver si alguien me puedes echar una mano (aunque sea al cuello).
+
+Un saludo.
+Adolfo
+
+-
+No hay camino hacía el Software Libre. El Software Libre es el camino.
+Sígueme en Twitter  ([URL="http://twitter.com/asanzdiego"]@asanzdiego[/URL])

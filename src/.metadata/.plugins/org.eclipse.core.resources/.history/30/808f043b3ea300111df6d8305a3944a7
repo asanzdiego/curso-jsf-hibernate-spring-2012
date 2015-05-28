@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf11696373545330" configfile="/jsf-02-conversor-y-validador/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="conversion_estandar" x="108" y="72" id="pf11696406604671" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf11696406604672" path="/conversion_estandar.jsp"/>
+  <nodes xsi:type="pageflow:PFPage" name="resultado_conversion" x="360" y="72" id="pf11696406604673" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf11696407739504" inlinks="pf11696406604672" path="/resultado_conversion.jsp"/>
+  <nodes xsi:type="pageflow:PFPage" name="home" x="528" y="168" id="pf11696407739505" referenceLink="//@navigationRule.7/@navigationCase.0/@toViewId|" inlinks="pf11696407739504 pf11696504130116 pf116973752451313 pf11697405104873" path="/home.jsp"/>
+  <nodes xsi:type="pageflow:PFPage" name="conversion_nuestra" x="105" y="168" id="pf11696504130117" referenceLink="//@navigationRule.2/@fromViewId|" outlinks="pf11696504130118" path="/conversion_nuestra.jsp"/>
+  <nodes xsi:type="pageflow:PFPage" name="resultado_conversion_nuestra" x="336" y="168" id="pf11696504130119" referenceLink="//@navigationRule.3/@fromViewId|" outlinks="pf11696504130116" inlinks="pf11696504130118" path="/resultado_conversion_nuestra.jsp"/>
+  <nodes xsi:type="pageflow:PFPage" name="validacion_estandar" x="111" y="264" id="pf116973736244010" referenceLink="//@navigationRule.4/@fromViewId|" outlinks="pf116973736244011" path="/validacion_estandar.jsp"/>
+  <nodes xsi:type="pageflow:PFPage" name="resultado_validacion_estandar" x="335" y="264" id="pf116973736244012" referenceLink="//@navigationRule.5/@fromViewId|" outlinks="pf116973752451313" inlinks="pf116973736244011" path="/resultado_validacion_estandar.jsp"/>
+  <nodes xsi:type="pageflow:PFPage" name="validacion_nuestra" x="114" y="348" id="pf11697404370810" referenceLink="//@navigationRule.6/@fromViewId|" outlinks="pf11697404370811" path="/validacion_nuestra.jsp"/>
+  <nodes xsi:type="pageflow:PFPage" name="resultado_validacion_nuestra" x="388" y="348" id="pf11697404370812" referenceLink="//@navigationRule.7/@fromViewId|" outlinks="pf11697405104873" inlinks="pf11697404370811" path="/resultado_validacion_nuestra.jsp"/>
+  <links id="pf11696406604672" target="pf11696406604673" source="pf11696406604671" outcome="resultado_conversion"/>
+  <links id="pf11696407739504" target="pf11696407739505" source="pf11696406604673" outcome="home"/>
+  <links id="pf11696504130118" target="pf11696504130119" source="pf11696504130117" outcome="resultado_conversion_nuestra"/>
+  <links id="pf11696504130116" target="pf11696407739505" source="pf11696504130119" outcome="home"/>
+  <links id="pf116973736244011" target="pf116973736244012" source="pf116973736244010" outcome="resultado_validacion"/>
+  <links id="pf116973752451313" target="pf11696407739505" source="pf116973736244012" outcome="home"/>
+  <links id="pf11697404370811" target="pf11697404370812" source="pf11697404370810" outcome="resultado_validacion_nuestra" redirect="true"/>
+  <links id="pf11697405104873" target="pf11696407739505" source="pf11697404370812" outcome="home"/>
+</pageflow:Pageflow>

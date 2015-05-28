@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=1024, user-scalable=no">
+  <meta name="generator" content="pandoc" />
+  <meta name="description" content="Deck.js Pandoc Slides" />
+  <meta name="author" content="Adolfo Sanz De Diego" />
+  <meta name="copyright" content="Deck.js Pandoc Slides - Adolfo Sanz De Diego -  Mayo 2012" /> 
+  <title>Deck.js Pandoc Slides</title>
+
+  <!-- deck core css -->
+  <link rel="stylesheet" href="../css/deck-core.css">
+
+  <!-- deck extensions css -->
+  <link rel="stylesheet" href="../css/deck-extension/goto.css">
+  <link rel="stylesheet" href="../css/deck-extension/hash.css">
+  <link rel="stylesheet" href="../css/deck-extension/menu.css">
+  <link rel="stylesheet" href="../css/deck-extension/navigation.css">
+  <link rel="stylesheet" href="../css/deck-extension/status.css">
+  <link rel="stylesheet" href="../css/deck-extension/pointer.css">
+
+  <!-- deck slide theme css -->
+  <link rel="stylesheet" href="../css/deck-slide-theme/web.css">
+  <!--
+  <link rel="stylesheet" href="../css/deck-slide-theme/beamer.css">
+  <link rel="stylesheet" href="../css/deck-slide-theme/mnml.css">
+  <link rel="stylesheet" href="../css/deck-slide-theme/neon.css">
+  <link rel="stylesheet" href="../css/deck-slide-theme/swiss.css">
+  <link rel="stylesheet" href="../css/deck-slide-theme/web.css">
+  -->
+
+  <!-- deck slide transition css -->
+  <link rel="stylesheet" href="../css/deck-slide-transition/horizontal.css">
+  <!--
+  <link rel="stylesheet" href="../css/deck-slide-transition/beamer.css">
+  <link rel="stylesheet" href="../css/deck-slide-transition/cube.css">
+  <link rel="stylesheet" href="../css/deck-slide-transition/fade.css">
+  <link rel="stylesheet" href="../css/deck-slide-transition/horizontal.css">
+  <link rel="stylesheet" href="../css/deck-slide-transition/vertical.css">
+  -->
+
+  <!-- custom css just for this page -->
+  <link rel="stylesheet" href="../css/custom.css">
+
+  <!-- modernizr deck js  -->
+  <script src="../js/modernizr-custom.js"></script>
+
+</head>
+<body class="deck-container">
+
+<!--header id="header">
+  <h1 class="title">Deck.js Pandoc Slides</h2>
+</header-->
+
+<section class="slide">
+  <h2 id="titlepage">Deck.js Pandoc Slides</h2>
+  <h3 id="documentauthor">Adolfo Sanz De Diego</h3>
+  <h4 id="documentdate">Mayo 2012</h4>
+</section>
+<section class="slide level1" id="autor">
+<h2><span class="header-section-number">1</span> Autor</h2>
+<ul>
+<li><strong>Adolfo Sanz De Diego</strong>
+<ul>
+<li>Correo: <a href="mailto:asanzdiego@gmail.com">asanzdiego@gmail.com</a></li>
+<li>Twitter: <a href="http://twitter.com/asanzdiego">@asanzdiego</a></li>
+<li>Blog: <a href="http://asanzdiego.blogspot.com.es">http://asanzdiego.blogspot.com.es</a></li>
+</ul></li>
+</ul>
+</section>
+<section class="slide level1" id="licencia">
+<h2><span class="header-section-number">2</span> Licencia</h2>
+<ul>
+<li><strong>This work is licensed under a:</strong>
+<ul>
+<li><a href="http://creativecommons.org/licenses/by-nc-nd/3.0/">Attribution-NonCommercial-NoDerivs 3.0 Unported</a></li>
+</ul></li>
+<li><strong>The program source code are licensed under a:</strong>
+<ul>
+<li><a href="http://www.gnu.org/licenses/gpl.html">GPL 3.0</a></li>
+</ul></li>
+</ul>
+</section>
+<section class="slide level1" id="dependencies">
+<h2><span class="header-section-number">3</span> Dependencies</h2>
+<ul>
+<li><a href="http://johnmacfarlane.net/pandoc/">Pandoc 1.9.2</a> (needs to be installed)</li>
+<li><a href="http://imakewebthings.com/deck.js/">Deck.js</a> (included)</li>
+</ul>
+</section>
+<section class="slide level1" id="build-html-pdf-and-slides-from-txt">
+<h2><span class="header-section-number">4</span> Build html, pdf and slides from txt</h2>
+<ul>
+<li>Go to txt folder and execute:</li>
+</ul>
+<pre><code>    ../bin/all2all.sh - To convert all txt files to html, pdf and slides
+   ../bin/all2html.sh - To convert all txt files to html
+    ../bin/all2pdf.sh - To convert all txt files to pdf
+  ../bin/all2slide.sh - To convert all txt files to slides
+   ../bin/txt2html.sh - To convert parameter txt file to html
+    ../bin/txt2pdf.sh - To convert parameter txt file to pdf
+  ../bin/txt2slide.sh - To convert parameter txt file to slide</code></pre>
+</section>
+<section class="slide level1" id="slide-keyboard-shortcuts">
+<h2><span class="header-section-number">5</span> Slide keyboard shortcuts</h2>
+<pre><code>                  [F] - Find text
+                  [M] - Miniature slides
+                  [G] - Go to slide number
+                  [P] - Pointer mouse
+           [ctrl]+[+] - Zoom in
+           [ctrl]+[-] - Zoom out
+ [ctrl]+[wheel mouse] - Zoom in/out
+              [space] - Next page
+              [intro] - Next page
+            [page up] - Next page
+           [up arrow] - Next page
+        [right arrow] - Next page
+          [backspace] - Previous page
+          [page down] - Previous page
+         [down arrow] - Previous page
+         [left arrow] - Previous page</code></pre>
+</section>
+
+<!--footer id="footer">
+  <h4 class="author"> Adolfo Sanz De Diego  - Mayo 2012</h4>
+</footer-->
+
+<!-- deck goto extension html -->
+<form action="." method="get" class="goto-form">
+  <label for="goto-slide">Go to slide:</label>
+  <input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
+  <datalist id="goto-datalist"></datalist>
+  <input type="submit" value="Go">
+</form>
+
+<!-- deck hash extension html -->
+<a href="." title="Permalink to this slide" class="deck-permalink">#</a>
+
+<!-- deck navigation extension html -->
+<a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+<a href="#" class="deck-next-link" title="Next">&#8594;</a>
+
+<!-- deck status extension html -->
+<p class="deck-status">
+  <span class="deck-status-current"></span> / <span class="deck-status-total"></span>
+</p>
+
+<!-- deck core js  -->
+<script src="../js/jquery-1.7-min.js"></script>
+<script src="../js/deck-core.js"></script>
+
+<!-- deck extension js -->
+<script src="../js/deck-extension/goto.js"></script>
+<script src="../js/deck-extension/hash.js"></script>
+<script src="../js/deck-extension/menu.js"></script>
+<script src="../js/deck-extension/navigation.js"></script>
+<script src="../js/deck-extension/status.js"></script>
+<script src="../js/deck-extension/search.js"></script>
+<script src="../js/deck-extension/pointer.js"></script>
+
+<!-- Initialize the deck. -->
+<script src="../js/init-deck.js"></script>
+
+</body>
+</html>

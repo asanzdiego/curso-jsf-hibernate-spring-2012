@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workingSetManager>
+<workingSet editPageId="org.eclipse.ui.resourceWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1337505685952_1" label="Hibernate" name="Hibernate">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/hibernate-01-simple" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/hibernate-02-relaciones" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/hibernate-03-herencia" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/hibernate-04-hql" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/hibernate-05-criteria" type="4"/>
+</workingSet>
+<workingSet editPageId="org.eclipse.ui.resourceWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1337505705426_2" label="Integracion" name="Integracion">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/integracion-ejemplo-parejas-core" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/integracion-ejemplo-parejas-frontend" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/integracion-spring-jsf" type="4"/>
+</workingSet>
+<workingSet editPageId="org.eclipse.ui.resourceWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1337505726732_3" label="JSF" name="JSF">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/jsf-01-general" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/jsf-02-conversor-y-validador" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/jsf-03-tablas" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/jsf-04-facelets" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/jsf-06-ajax4jsf" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/jsf-07-ejemplo-personas" type="4"/>
+</workingSet>
+<workingSet editPageId="org.eclipse.ui.resourceWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1337505738923_4" label="Spring" name="Spring">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/spring-01-simple" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/spring-02-bd" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/spring-03-aop" type="4"/>
+</workingSet>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1337343878163_0" label="Window Working Set" name="Aggregate for window 1337343878161"/>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1337589762931_10" label="Multiple Working Sets" name="Aggregate:Hibernate:Integracion:JSF:Spring:">
+<workingSet IMemento.internal.id="Hibernate"/>
+<workingSet IMemento.internal.id="Integracion"/>
+<workingSet IMemento.internal.id="JSF"/>
+<workingSet IMemento.internal.id="Spring"/>
+</workingSet>
+</workingSetManager>

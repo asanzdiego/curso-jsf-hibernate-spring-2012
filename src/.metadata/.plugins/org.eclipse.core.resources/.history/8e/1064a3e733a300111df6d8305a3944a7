@@ -1,0 +1,49 @@
+package curso.dao.hibernate;
+import java.util.List;
+import org.springframework.orm.hibernate3.HibernateTemplate;
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import curso.dao.UsuarioDao;
+import curso.modelo.Usuario;
+
+// Extiende de una clase que proporciona los métodos necesarios para acceder a Hibernate
+public class UsuarioDaoHibernate extends HibernateDaoSupport implements UsuarioDao {
+	
+	public void saveUsuario (Usuario usuario) {
+		this.logger.debug("Intentamos guardar el usuario "+usuario);
+		HibernateTemplate temp = getHibernateTemplate();
+		if (usuario!= null){
+			List listado = temp.find("FROM "+Usuario.class.getName()+" as usuario where usuario.id ="+usuario.getId());
+			if (listado.isEmpty()){
+				this.logger.debug("No contiene , hacemos un save");
+				temp.save(usuario);
+			} else {
+				this.logger.debug("Contiene, hacemos un update");
+				temp.update(usuario);
+			}
+		}
+	}
+	public Usuario findUsuario (Integer id) {
+		this.logger.debug("Buscamos el usuario "+id);
+		return (Usuario) getHibernateTemplate().get(Usuario.class,id);
+	}
+	
+	public void deleteUsuario (Integer id) {
+		this.logger.debug("Borramos el usuario "+id);
+		Usuario usu = (Usuario) getHibernateTemplate().load(Usuario.class,id);
+		getHibernateTemplate().delete(usu);
+		
+	}
+	public void saveListaUsuarios (Usuario[] usuario) {
+		this.logger.debug("Guardamos todos los usuarios");
+		HibernateTemplate temp = getHibernateTemplate(); 
+		for (int i = 0; i < usuario.length; i++) {
+			this.logger.debug("Guardando "+usuario[i]+ " i : "+i);
+			temp.save(usuario[i]); 
+		}
+	}
+
+	public List listAll() {
+		
+		return  getHibernateTemplate().find("From Usuario");
+	}
+}

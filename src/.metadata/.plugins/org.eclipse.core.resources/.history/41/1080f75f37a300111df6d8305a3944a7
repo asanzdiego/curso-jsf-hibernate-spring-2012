@@ -1,0 +1,13 @@
+package AroundAdvicewithSimpleReturnTypeExample;
+
+import org.aopalliance.intercept.MethodInvocation;
+import org.aopalliance.intercept.MethodInterceptor;
+
+public class AroundAdvice implements MethodInterceptor
+{
+   public Object invoke(MethodInvocation invocation) throws Throwable
+   {
+      System.out.println("Hello world! (by " + this.getClass().getName() + ")");
+      return new Integer(20);
+   }
+}

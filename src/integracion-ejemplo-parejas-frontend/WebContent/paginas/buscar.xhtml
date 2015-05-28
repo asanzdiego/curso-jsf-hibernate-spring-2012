@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Insert title here</title>
+</head>
+<body>
+<form jsfc="h:form" prependId="false">
+<!-- todo lo de arriba se borrará -->
+<ui:composition template="/WEB-INF/plantillas/molde.xhtml">
+<ui:define name="cuerpo">
+<table>
+	<tr>
+		<td>${msg.nombre}</td>
+		<td><input type="text" id="nombre" jsfc="h:inputText" 
+			value="#{gestionBusquedas.usuario.nombre}" required="true"/>
+			<h:message for="nombre"/></td>
+	</tr>
+	<tr>
+		<td>${msg.edad}</td>
+		<td><input type="text" id="edad" jsfc="h:inputText" 
+			value="#{gestionBusquedas.usuario.edad}"	required="true" >
+				<f:validateLongRange minimum="18"/>
+			</input>
+			<h:message for="edad"/></td>
+	</tr>	
+	<tr>
+		<td>${msg.altura}</td>
+		<td><input type="text" id="altura" jsfc="h:inputText"
+			value="#{gestionBusquedas.usuario.altura}" required="true" >
+				<f:validateDoubleRange maximum="3"/>
+			</input>
+			<h:message for="altura"/></td>
+	</tr>
+	<tr>
+		<td>${msg.sexo}</td>
+		<td><input type="text" id="sexo" jsfc="h:inputText" 
+			value="#{gestionBusquedas.usuario.sexo}" required="true"/>
+			<h:message for="sexo"/></td>
+	</tr>
+	<tr>
+		<td>${msg.soltero}</td>
+		<td><input type="text" id="soltero" jsfc="h:inputText" 
+			value="#{gestionBusquedas.usuario.soltero}" required="true"/>
+			<h:message for="soltero"/></td>
+	</tr>	
+</table>
+<input type="submit" jsfc="h:commandButton" value="buscar"
+			action="#{gestionBusquedas.buscar}"/>
+</ui:define>
+</ui:composition>
+</form>
+</body>
+</html>

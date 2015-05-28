@@ -1,0 +1,29 @@
+import modelo.Cliente;
+import modelo.DatosBancarios;
+import modelo.Direccion;
+
+import org.hibernate.Session;
+
+import util.HibUtil;
+
+public class PruebaOneToOne {
+
+  public static void main(final String[] args) {
+
+    final Direccion d = new Direccion("Madrid", "C/Alcal�", "12345");
+    final Cliente c = new Cliente(0, "Hierros del Norte", d, "91 123 45 67");
+
+    final DatosBancarios db = new DatosBancarios(0, c, "HTC", 5000);
+    c.setDatosBancarios(db);
+
+    final Session s = HibUtil.getSessionFactory().openSession();
+    s.beginTransaction();
+
+    s.save(c);
+
+    s.getTransaction().commit();
+    s.close();
+
+  }
+
+}

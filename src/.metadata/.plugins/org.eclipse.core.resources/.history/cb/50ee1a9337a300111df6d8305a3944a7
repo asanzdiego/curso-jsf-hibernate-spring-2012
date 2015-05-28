@@ -1,0 +1,23 @@
+package CuckoosEggusingAroundAdviceExample;
+
+import org.aopalliance.intercept.MethodInvocation;
+import org.aopalliance.intercept.MethodInterceptor;
+
+public class CuckoosEgg implements MethodInterceptor
+{
+   public ReplacementFeature replacementFeature = new ReplacementFeature();
+   
+   public Object invoke(MethodInvocation invocation) throws Throwable
+   {
+      if (invocation.getMethod().getName().equals("foo"))
+      {
+         replacementFeature.foo();
+      }
+      else
+      {
+         replacementFeature.bar();
+      }
+      
+      return null;
+   }
+}

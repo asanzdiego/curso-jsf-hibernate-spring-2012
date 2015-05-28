@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beansProjectDescription>
+	<version>1</version>
+	<pluginVersion><![CDATA[2.0.3.v200802061800]]></pluginVersion>
+	<configSuffixes>
+		<configSuffix><![CDATA[xml]]></configSuffix>
+	</configSuffixes>
+	<enableImports><![CDATA[false]]></enableImports>
+	<configs>
+		<config>WebContent/WEB-INF/presentacion.xml</config>
+		<config>WebContent/WEB-INF/seguridad.xml</config>
+		<config>WebContent/WEB-INF/transacciones.xml</config>
+	</configs>
+	<configSets>
+		<configSet>
+			<name><![CDATA[parejas]]></name>
+			<allowBeanDefinitionOverriding>true</allowBeanDefinitionOverriding>
+			<incomplete>false</incomplete>
+			<configs>
+				<config>/ParejasCore/src/app/parejas/negocio/negocio.xml</config>
+				<config>/ParejasCore/src/app/parejas/persistencia/persistencia.xml</config>
+				<config>WebContent/WEB-INF/presentacion.xml</config>
+				<config>WebContent/WEB-INF/seguridad.xml</config>
+				<config>WebContent/WEB-INF/transacciones.xml</config>
+			</configs>
+		</configSet>
+	</configSets>
+</beansProjectDescription>

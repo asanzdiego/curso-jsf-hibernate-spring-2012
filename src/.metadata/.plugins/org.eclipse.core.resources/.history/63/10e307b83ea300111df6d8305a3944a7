@@ -1,0 +1,34 @@
+package com.curso.validaciones;
+
+public class Telefono {
+	private String prefijo;
+	private String numero;
+
+	public Telefono() {
+
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	public String getPrefijo() {
+		return prefijo;
+	}
+
+	public void setPrefijo(String prefijo) {
+		this.prefijo = prefijo;
+	}
+
+	public String toString() {
+		StringBuffer elNumero = new StringBuffer();
+		elNumero.append(prefijo);
+		elNumero.append("-");
+		elNumero.append(numero);
+		return elNumero.toString();
+	}
+}

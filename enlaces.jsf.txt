@@ -1,0 +1,40 @@
+- tutorial completo con ejemplos:
+
+    http://www.mkyong.com/tutorials/jsf-2-0-tutorials/
+
+- autocompletado:
+
+    http://www.adictosaltrabajo.com/tutoriales/tutoriales.php?pagina=faceletsAutocompleterJsfEclipseMaven
+
+- faces-redirect:
+
+    Ponerlo de forma automática -> http://stackoverflow.com/questions/5416070/jsf-2-and-post-redirect-get
+    Problemas (una nueva petición HTTP) -> http://www.mkyong.com/jsf2/jsf-page-forward-vs-page-redirect/
+    Diferencia entre outputLink, commandLink y Link:
+    -> http://stackoverflow.com/questions/4317684/when-should-i-use-houtputlink-instead-of-hcommandlink
+    -> http://www.mkyong.com/jsf2/jsf-2-link-commandlink-and-outputlink-example/
+
+- validación:
+
+    JSF 2.0 -> http://www.adictosaltrabajo.com/tutoriales/tutoriales.php?pagina=jsf2Return
+    AJAX -> http://www.adictosaltrabajo.com/tutoriales/tutoriales.php?pagina=jsf2AjaxBeanValidation
+    Tipos de Validación -> http://www.yaxche-soft.com/es/blog/validaciones-con-bean-validation-y-hibernate-validator
+
+- scopes:
+
+    leer -> http://balusc.blogspot.com.es/2011/09/communication-in-jsf-20.html
+    
+    view scope -> sólo útil con Ajax (cuando se regenera la vista sin recargar la página entera)
+
+    flash scope -> es más que una request y menos que una sesión, pero hay que hacerlo manualmente.
+    flash scope example -> http://jugojava.blogspot.com.es/2011/06/jsf2-flash-scope-example.html
+
+    custom scope -> es más manual que el flash
+    custom scope example-> https://blogs.oracle.com/rlubke/entry/custom_managed_bean_scopes
+
+    NEW conversation scope (jee6) -> http://blog.goyello.com/2011/06/08/jee6-cdi-and-conversation-scope/
+    JSR 299 (CDI=Context andd Dependency Injection)
+
+- integración:
+
+    JSF+Spring+Hibernate -> http://www.mkyong.com/jsf2/jsf-2-0-spring-hibernate-integration-example/

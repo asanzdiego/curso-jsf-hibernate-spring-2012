@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="app.parejas.modelo">
+  <class name="Persona" table="parejas">
+  	<id name="nombre" column="idnombre">
+  		<generator class="assigned"/>
+  	</id>
+  	<property name="edad"/>
+  	<property name="altura"/>
+  	<property name="sexo" length="1"/>
+  	<property name="soltero"/>
+  	<set name="aficiones" table="personas_aficiones">
+  		<key column="idpersona"/>
+  		<element column="aficion" type="java.lang.String"/> 
+  	</set>
+  </class>
+  
+</hibernate-mapping>

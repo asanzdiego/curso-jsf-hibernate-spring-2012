@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE faces-config PUBLIC
+  "-//Sun Microsystems, Inc.//DTD JavaServer Faces Config 1.0//EN"
+  "http://java.sun.com/dtd/web-facesconfig_1_0.dtd">
+
+<faces-config>
+
+	<application>
+		<locale-config>
+			<default-locale>en</default-locale>
+		</locale-config>
+		<view-handler>com.sun.facelets.FaceletViewHandler</view-handler>
+	</application>
+
+
+	<navigation-rule>
+		<!-- Add a navigation comming from cdForm.xhtml -->
+
+		<from-view-id>/cdForm.xhtml</from-view-id>
+
+		<navigation-case>
+			<!-- Add a navigation going to results -->
+			<from-action>#{CDManagerBean.addCD}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/listing.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<!-- Add a navigation going to results -->
+			<from-action>#{CDManagerBean.updateCD}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/listing.xhtml</to-view-id>
+		</navigation-case>
+
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/listing.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{CDManagerBean.editCD}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/cdForm.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{CDManagerBean.addNew}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/cdForm.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+
+	<navigation-rule>
+		<from-view-id>/store.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>viewCart</from-outcome>
+			<to-view-id>/showCart.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+
+	<navigation-rule>
+		<from-view-id>/showCart.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>store</from-outcome>
+			<to-view-id>/store.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+
+	<managed-bean>
+		<description>
+			The "backing file" bean that backs up the CD application
+		</description>
+		<managed-bean-name>CDManagerBean</managed-bean-name>
+		<managed-bean-class>
+			com.arcmind.jsfquickstart.controller.StoreController
+		</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+
+	<managed-bean>
+		<description>
+			The "backing file" bean that backs up shopping cart
+		</description>
+		<managed-bean-name>cart</managed-bean-name>
+		<managed-bean-class>
+			com.arcmind.jsfquickstart.controller.ShoppingCartController
+		</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+
+
+</faces-config>

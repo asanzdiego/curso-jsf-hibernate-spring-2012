@@ -1,0 +1,66 @@
+package app.presentacion;
+
+import java.io.Serializable;
+import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+
+
+import app.modelo.Cliente;
+
+public class GestionClientes implements Serializable, Navegacion {
+	private Log log=LogFactory.getLog(getClass());
+	private Cliente cActual;
+	private List<Cliente> clientes;
+	private String columna;
+	private boolean sentido;
+	
+	public GestionClientes() {
+		cActual=new Cliente();
+	}
+	
+	//action method
+	
+	public String anadir(){
+		clientes.add(cActual);
+		log.info("añadiendo cliente:"+cActual);
+		return Navegacion.LISTAR;
+	}
+
+	public Cliente getCActual() {
+		return cActual;
+	}
+
+	public void setCActual(Cliente actual) {
+		cActual = actual;
+	}
+
+	public List<Cliente> getClientes() {
+		return clientes;
+	}
+
+	public void setClientes(List<Cliente> clientes) {
+		this.clientes = clientes;
+	}
+
+	public String getColumna() {
+		return columna;
+	}
+
+	public void setColumna(String columna) {
+		this.columna = columna;
+	}
+
+	public boolean isSentido() {
+		return sentido;
+	}
+
+	public void setSentido(boolean sentido) {
+		this.sentido = sentido;
+	}
+	
+	
+	
+}

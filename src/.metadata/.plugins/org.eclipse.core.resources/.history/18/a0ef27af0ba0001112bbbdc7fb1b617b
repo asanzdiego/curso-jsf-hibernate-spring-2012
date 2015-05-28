@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf11693819575980" configfile="/EjemplosJSF.1.General/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="p2" x="122" y="562" id="pf11693850903833" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" path="/p2.jsp"/>
+  <nodes xsi:type="pageflow:PFPage" name="customize" x="122" y="946" id="pf11695656668780" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf11695656668781 pf11695656668782" path="/customize.jsp"/>
+  <nodes xsi:type="pageflow:PFPage" name="same-color" x="338" y="754" id="pf11695656668783" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf11695656668781" path="/same-color.jsp"/>
+  <nodes xsi:type="pageflow:PFPage" name="show-preview" x="338" y="1138" id="pf11695656668784" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" inlinks="pf11695656668782" path="/show-preview.jsp"/>
+  <links id="pf11695656668781" target="pf11695656668783" source="pf11695656668780" outcome="same-color"/>
+  <links id="pf11695656668782" target="pf11695656668784" source="pf11695656668780" outcome="success"/>
+</pageflow:Pageflow>

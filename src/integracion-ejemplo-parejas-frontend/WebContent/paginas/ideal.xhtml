@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Insert title here</title>
+</head>
+<body>
+<ui:composition template="/WEB-INF/plantillas/molde.xhtml">
+	<ui:define name="cabecera">
+		<h3><h:messages id="msg"/>${gestionBusquedas.usuario.nombre}" 
+		</h3>
+
+	</ui:define>
+	<ui:define name="cuerpo">
+		<h5>estos son los datos de tu pareja ideal:</h5>
+		<table>
+			<tr>
+				<td>${msg.nombre}</td>
+				<td>${gestionBusquedas.ideal.nombre}</td>
+			</tr>
+			<tr>
+				<td>${msg.edad}</td>
+				<td>${gestionBusquedas.ideal.edad}</td>
+			</tr>
+			<tr>
+				<td>${msg.altura}</td>
+				<td>${gestionBusquedas.ideal.altura}</td>
+			</tr>
+			<tr>
+				<td>${msg.sexo}</td>
+				<td>${gestionBusquedas.ideal.sexo}</td>
+			</tr>
+			<tr>
+				<td>${msg.soltero}</td>
+				<td>${gestionBusquedas.ideal.soltero}</td>
+			</tr>
+			<tr>
+				<td>aficiones</td>
+				<td>
+				<c:forEach var="a" items="${gestionBusquedas.ideal.aficiones}">
+					${a},
+				</c:forEach>
+				
+				</td>
+			</tr>
+		</table>
+	</ui:define>
+</ui:composition>
+</body>
+</html>

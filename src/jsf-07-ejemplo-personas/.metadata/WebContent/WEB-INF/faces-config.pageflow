@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf12042118448590" configfile="/EjercicioPersonasJSF/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="addPersona" x="61" y="72" id="pf12042135162341" outlinks="pf12042135162342" path="/addPersona.jsp"/>
+  <nodes xsi:type="pageflow:PFPage" name="listaPersonas" x="230" y="82" id="pf12042135162343" inlinks="pf12042135162342" path="/listaPersonas.jsp"/>
+  <links id="pf12042135162342" target="pf12042135162343" source="pf12042135162341" outcome="listado"/>
+</pageflow:Pageflow>

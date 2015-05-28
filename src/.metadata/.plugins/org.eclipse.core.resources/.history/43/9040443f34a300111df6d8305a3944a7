@@ -1,0 +1,42 @@
+package curso.dao.impl1;
+
+import java.util.HashMap;
+import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import curso.dao.UsuarioDao;
+import curso.modelo.Usuario;
+ 
+public class UsuarioDaoStatic implements UsuarioDao { 
+	private static final Log log = LogFactory.getLog(UsuarioDaoStatic.class);
+	
+	private static HashMap<Integer,Usuario> tabla; 
+	
+	public UsuarioDaoStatic () { 
+		log.debug("Constructor de la implementacion DAO"); 
+		tabla = new HashMap<Integer,Usuario> ();
+	}
+	public void saveUsuario (Usuario usuario) { 
+		log.debug("Guardamos el usuario "+usuario); 
+		if (usuario != null) 
+			tabla.put(usuario.getId(),usuario); 
+	}
+	public Usuario findUsuario (Integer id) { 
+		log.debug("Estamos buscando usuario "+id);
+		return tabla.get(id); 
+	}
+	public void deleteUsuario (Integer id) {
+		log.debug ("Borramos el usuario "+ id); 
+		tabla.remove(id);
+	}
+	public List listAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public void saveListaUsuarios(Usuario[] usuario) {
+		// TODO Auto-generated method stub
+		
+	}
+}

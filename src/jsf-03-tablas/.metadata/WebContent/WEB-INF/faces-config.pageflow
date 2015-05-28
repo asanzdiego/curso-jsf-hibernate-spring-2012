@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf11704183795750" configfile="/EjemplosJSF.3.Tablas/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="*" id="pf11704200053032" outlinks="pf11704200053033" path="*"/>
+  <nodes xsi:type="pageflow:PFPage" name="listaPaginada" id="pf11704200053034" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf11704200053033" path="/listaPaginada.jsp"/>
+  <links id="pf11704200053033" target="pf11704200053034" source="pf11704200053032"/>
+</pageflow:Pageflow>

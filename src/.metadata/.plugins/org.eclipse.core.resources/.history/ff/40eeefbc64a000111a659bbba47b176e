@@ -1,0 +1,160 @@
+import java.util.List;
+
+import modelo.Cliente;
+import modelo.Producto;
+import modelo.ResumenCliente;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+
+import util.HibUtil;
+
+
+public class PruebasHQL {
+
+	
+	public static void main(String[] args) {
+		
+		Session s = HibUtil.getSessionFactory().openSession();
+		
+		System.out.println("=====================");
+		Query q1 = s.createQuery("select c from modelo.Cliente as c");
+		//Autoimport
+		//no hace falta poner el 'as'
+		Query q1Bis = s.createQuery("select c from Cliente c");
+		//Si es 'select *' nos ahorramos el select
+		Query q1Bis2 = s.createQuery("from Cliente c"); 
+		List<Cliente> rs1 = q1Bis2.list();
+		for(Cliente c:rs1)
+			System.out.println(c.getNombre());
+
+		System.out.println("=====================");
+		//Producto cartesiano:
+		Query q2 = s.createQuery("from Cliente c, Pedido p");
+		
+		//JOIN EXPLICITO
+		//inner, left, right
+		/*Query q3 = s.createQuery("select c from Cliente c " +
+								 "inner join Pedido p where p.fecha='2009/10/20'");
+		List<Cliente> rs2 = q3.list();
+		for(Cliente c: rs2)
+		{
+			System.out.println(c.getNombre());
+			System.out.println(c.getPedidos());
+		}*/
+		
+		//JOIN IMPLICITO
+		//Query q4    = s.createQuery("from Pedido p inner join Cliente c where c.direccion.ciudad = 'Barcelona'");
+		//Query q4Bis = s.createQuery("from Pedido p where p.cliente.direccion.ciudad='Barcelona'");
+		
+		System.out.println("=====================");
+		//Obtener atributos sueltos:
+		//Por defecto devuelve array
+		Query q5 = s.createQuery("select c.nombre, c.telefono from Cliente c");
+		List<Object[]> rs3 = q5.list();
+		for(Object[] arr: rs3)
+		{
+			for(int a=0; a<arr.length;a++)
+				System.out.print(arr[a]+"-");
+			System.out.println();
+		}
+		//Si se te antoja un list
+		Query q6 = s.createQuery("select new List(c.nombre, c.telefono) from Cliente c");		
+		List<List<Object>> rs4 = q6.list();
+		
+		//Creando una clase especial para contener las columnas seleccionadas
+		Query q7 = s.createQuery("select new modelo.ResumenCliente(c.nombre, c.telefono) from Cliente c");		
+		List<ResumenCliente> rs5 = q7.list();
+		for(ResumenCliente rc: rs5)
+			System.out.println(rc.getNombre()+","+rc.getTelefono());
+		
+		
+		System.out.println("=====================");		
+		//Consultas polimorficas
+		Query q8 = s.createQuery("from Software s");
+		
+		Query q9 = s.createQuery("from Producto p where p.class=Software or p.class=Hardware");
+		List<Producto> rs6 = q9.list();
+		for(Producto p: rs6)
+			System.out.println(p.getNombre());
+		
+		Query q10 = s.createQuery("from Producto p");
+		List<Producto> rs7 = q10.list();
+		//for(Producto p: rs7)
+			//System.out.println(p.getNombre());
+		
+		System.out.println("=====================");			
+		//Funciones
+		Query q11 = s.createQuery("select Count(p) as cuenta from Producto p");
+		Query q11Bis = s.createQuery("select max(p.stock) as max from Producto p");
+		Query q11Bis2 = s.createQuery("select avg(p.stock) as media from Producto p");
+		List<Double> rs8 = q11Bis2.list();
+		
+		System.out.println("Media:"+rs8.get(0));
+	
+		System.out.println("=====================");			
+		//Expresiones
+		// +, -, *, /
+		// =, <=, >=, <>, !=, like
+		//AND, OR, NOT
+		//()
+		//IN, NOT IN, BETWEEN, , IS NULL, IS NOT NULL
+		//IS EMPTY 'dame los clientes que no tienen pedidos, IS NOT EMPTY
+		//EJBQL: substring(), trim(), lower(), upper(), length(), abs(), sqrt(), mod()
+		//       current_date(), current_time(), current_timeStamp()
+		Query q12 = s.createQuery("from Cliente c where c.direccion.ciudad in ('Salamanca','Chinchon')");
+		List<Cliente> rs9 = q12.list();
+		for(Cliente c: rs9)
+			System.out.println(c.getNombre());
+		
+		System.out.println("=====================");			
+		//Utilizando las colecciones
+		String str = "from Pedido p where p.detalles[0].producto.idProducto=15";
+		
+		System.out.println("=====================");	
+		//Order by
+		Query q13 = s.createQuery("from Cliente c order by c.nombre desc");
+		List<Cliente> rs10 = q13.list();
+		for(Cliente c: rs10)
+			System.out.println(c.getNombre());		
+		
+		System.out.println("=====================");	
+		//Group by
+		Query q14 = s.createQuery("select c.direccion.ciudad, count(*) from Cliente c group by c.direccion.ciudad");
+		List<Object[]> rs11 = q14.list();
+		for(Object[] arr: rs11)
+			System.out.println(arr[0]+","+arr[1]);			
+		
+		s.close();
+		
+		System.out.println("=====================");			
+		//Subqueries
+		String str2 = "from Producto p where p.precio>(select avg(p.precio) from Producto p";
+			
+		System.out.println("=====================");			
+		//Bulk update, bulk delete
+		Query q15 = s.createQuery("update Produto p set p.stock=p.stock+100");
+		Query q16 = s.createQuery("delete Produto p where p.stock=0");
+		
+		//Paginacion
+		Query q17 = s.createQuery("from Cliente c");
+		q17.setMaxResults(5);
+		q17.setFirstResult(0);
+		
+		//'Prepared statements'
+		Query q18 = s.createQuery("from Cliente c where c.direccion.ciudad=? and c.nombre like '?%'");
+		q18.setParameter(0, "Salamanca");
+		q18.setParameter(1, "A");
+		
+		Query q19 = s.createQuery("from Cliente c where c.direccion.ciudad=:ciudad and c.nombre like ':letra%'");
+		q18.setParameter("ciudad", "Salamanca");
+		q18.setParameter("letra", "A");		
+		
+		
+		
+		
+		
+		
+	}
+	
+}

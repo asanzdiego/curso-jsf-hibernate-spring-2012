@@ -1,0 +1,41 @@
+import modelo.Cliente;
+import modelo.Direccion;
+
+import org.hibernate.Session;
+
+import util.HibUtil;
+
+
+public class PruebaComponent {
+
+	public static void main(String[] args) {
+		
+		
+		Direccion d = new Direccion("Salamanca","Horno 2","12345");
+		Cliente c = new Cliente(0,"Pipas Facundo",d,"923 23 45 67");
+		
+		Session s = HibUtil.getSessionFactory().openSession();		
+		s.beginTransaction();
+		 
+		s.save(c);		
+		
+		s.getTransaction().commit();
+		s.close();
+		
+		System.out.println("done");
+	}
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+

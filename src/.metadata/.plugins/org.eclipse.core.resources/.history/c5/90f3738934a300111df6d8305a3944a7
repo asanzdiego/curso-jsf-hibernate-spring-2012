@@ -1,0 +1,63 @@
+package curso.dao.JDBCTemplate;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.sql.DataSource;
+
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.RowCallbackHandler;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
+
+import curso.dao.UsuarioDao;
+import curso.modelo.Usuario;
+
+public class UsuarioDaoJDBCTemplate  extends JdbcDaoSupport implements UsuarioDao {
+
+
+ 
+	public void deleteUsuario(Integer id) {
+		getJdbcTemplate().update("delete from usuarios where id=?", new Object[]{id});
+
+	}
+
+	public Usuario findUsuario(Integer id) {
+		try{
+			return (Usuario) getJdbcTemplate().queryForObject("select * from usuarios where id="+id, 
+					new RowMapper(){
+						public Object mapRow(ResultSet rs, int count) throws SQLException {
+							return new Usuario(rs.getInt("id"),rs.getString("nombre"));
+						}			
+			});
+		}catch(EmptyResultDataAccessException e){
+			return null;
+		}
+	}
+
+	public List listAll() {
+		final List lista=new ArrayList(getJdbcTemplate().queryForInt("select count(*) from personas"));
+		getJdbcTemplate().query("select * from usuarios", new RowCallbackHandler(){
+			public void processRow(ResultSet rs) throws SQLException {
+				lista.add(new Usuario(rs.getInt("id"),rs.getString("nombre")));
+			}
+		});
+		return lista;
+	}
+
+	public void saveUsuario(Usuario usuario) {
+		getJdbcTemplate().update("insert into usuarios values(?,?)", new Object[]{usuario.getId(),usuario.getNombre()});
+
+	}
+	
+	public void saveListaUsuarios(Usuario[] usuarios) {
+		for(Usuario u:usuarios)
+			saveUsuario(u);
+
+	}
+
+}

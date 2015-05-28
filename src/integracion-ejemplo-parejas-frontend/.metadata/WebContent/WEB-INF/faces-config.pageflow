@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf12052603375930" configfile="/ParejasFrontEnd/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="paginas/buscar.xhtml" x="31" y="80" id="pf12052661779211" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf12052661779212 pf12052666803754" path="/paginas/buscar.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/ideal.xhtml" x="224" y="89" id="pf12052661779213" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf12052661779212" path="/paginas/ideal.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/afines.xhtml" x="177" y="229" id="pf12052666803755" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf12052666803754" path="/paginas/afines.xhtml"/>
+  <links id="pf12052661779212" target="pf12052661779213" source="pf12052661779211" outcome="encontrado"/>
+  <links id="pf12052666803754" target="pf12052666803755" source="pf12052661779211" outcome="no_encontrado"/>
+</pageflow:Pageflow>

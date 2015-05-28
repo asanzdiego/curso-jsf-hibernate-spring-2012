@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+
+<ui:composition template="/WEB-INF/layout/layout.xhtml">
+	<ui:define name="title">Backend Listing</ui:define>
+	<ui:define name="content">
+		<h:form>
+			<h:dataTable id="items" value="#{CDManagerBean.cds}" var="cd"
+				rowClasses="oddRow, evenRow" headerClass="tableHeader">
+
+				<!--  Title -->
+				<h:column>
+					<f:facet name="header">
+						<h:panelGroup>
+							<h:outputText value="Title" />
+							<f:verbatim>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[</f:verbatim>
+
+							<h:commandLink styleClass="smallLink"
+								action="#{CDManagerBean.sort}">
+								<h:outputText id="ascTitle" value="asc" />
+								<f:param name="by" value="title"/>
+								<f:param name="order" value="asc"/>
+							</h:commandLink>
+
+							<h:outputText value="," />
+							<!-- Sort decsending -->
+							<h:commandLink styleClass="smallLink"
+								action="#{CDManagerBean.sort}">
+								<h:outputText id="decTitle" value="dec" />
+								<f:param name="by" value="title"/>
+								<f:param name="order" value="dec"/>								
+							</h:commandLink>
+							<f:verbatim>]</f:verbatim>
+						</h:panelGroup>
+					</f:facet>
+
+					<h:outputText value="#{cd.title}" />
+				</h:column>
+
+				<!--  Artist -->
+				<h:column>
+					<f:facet name="header">
+						<h:panelGroup>
+							<h:outputText value="Artist" />
+							<f:verbatim>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[</f:verbatim>
+
+							<h:commandLink styleClass="smallLink"
+								action="#{CDManagerBean.sort}">
+								<h:outputText id="ascArtist" value="asc" />
+								<f:param name="by" value="artist"/>
+								<f:param name="order" value="asc"/>								
+							</h:commandLink>
+
+							<h:outputText value="," />
+							<!-- Sort decsending -->
+							<h:commandLink styleClass="smallLink"
+								action="#{CDManagerBean.sort}">
+								<h:outputText id="decArtist" value="dec" />
+								<f:param name="by" value="artist"/>
+								<f:param name="order" value="dec"/>								
+							</h:commandLink>
+							<f:verbatim>]</f:verbatim>
+						</h:panelGroup>
+					</f:facet>
+					<h:outputText value="#{cd.artist}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Price" />
+					</f:facet>
+					<h:outputText value="#{cd.price}" />
+				</h:column>
+
+				<h:column>
+					<h:commandLink action="#{CDManagerBean.editCD}">
+						<f:verbatim>Edit</f:verbatim>
+					</h:commandLink>
+				</h:column>
+
+			</h:dataTable>
+
+			<br />
+			<h:commandLink action="#{CDManagerBean.addNew}">
+				<f:verbatim>Add CD</f:verbatim>
+			</h:commandLink>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

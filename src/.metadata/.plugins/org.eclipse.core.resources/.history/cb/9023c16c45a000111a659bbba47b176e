@@ -1,0 +1,23 @@
+import modelo.Persona;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+public class PruebaUpdate {
+
+  public static void main(final String[] args) {
+
+    final SessionFactory sf = HibUtil.getSessionFactory();
+    final Session s = sf.openSession();
+    s.beginTransaction();
+
+    final Persona p = new Persona(1, "NOMBRE", "C/BARQUILLO", 10, 12345);
+    s.update(p);
+
+    s.getTransaction().commit();
+    s.close();
+    sf.close();
+
+  }
+
+}

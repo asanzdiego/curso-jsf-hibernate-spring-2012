@@ -1,0 +1,37 @@
+import javax.sql.DataSource;
+
+public class FabricaPersonaDao {
+
+  public static FabricaPersonaDao instance;
+
+  private DataSource dataSource;
+
+  public DataSource getDataSource() {
+
+    return this.dataSource;
+  }
+
+  public void setDataSource(final DataSource dataSource) {
+
+    this.dataSource = dataSource;
+  }
+
+  static {
+    instance = new FabricaPersonaDao();
+  }
+
+  private FabricaPersonaDao() {
+
+  }
+
+  public static FabricaPersonaDao getInstance() {
+
+    return instance;
+  }
+
+  public PersonaDao getDao() {
+
+    return new PersonaDaoMysqlImpl(this.dataSource);
+  }
+
+}
